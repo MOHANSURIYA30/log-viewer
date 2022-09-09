@@ -1,0 +1,268 @@
+<div class="logger-container">
+<!-- <div class="nav-bar">
+   <div class="nav-list">
+       <div style=" background-color: blue;color: white;">Logs</div>
+       <div>Basic</div>
+       <div>Advanced</div>
+       <div>Settings</div>
+       <div>Stats</div>
+       <div>System</div>
+       <div>Help</div>
+   </div>
+</div> -->
+
+<div class="log-content">
+ <h1>Logs</h1>
+ <div class="search-container" >
+    <label >Search</label>
+   <div class="search-input-container"  >
+    <input [formControl]="search_filter"   placeholder="Search Here"  class="search-input" type="text"  > 
+    <button  class="search-drop" (click)="dateChange()">Search</button>
+    <!-- <select [formControl]="search_drop" (change)="SearchChange()"  class="search-drop"  >
+        <option value="table">Table</option>
+        <option value="database">Database</option>
+    </select> -->
+   </div>
+    
+ </div>
+ <div class="input-row">
+    <div class="input-container">
+        <label >Type</label>
+       <div class="input-elements">
+           <select [formControl]="type_filter"  (change)="dateChange()"  class="type-filter">
+               <option  value="all">All</option>
+               <!-- <option value="info">Info</option>
+               <option value="warn">Warn</option>
+               <option value="error">Error</option>              
+               <option value="success">Success</option> -->
+               <option value="ERROR">ERROR</option>
+               <option value="CRITICAL">CRITICAL</option>
+               <option value="WARNING">WARNING</option>
+           </select>
+       </div>
+    </div>
+    <div class="input-container">
+        <label >Date</label>
+       <div class="input-elements">
+           <input type="date"  (change)=" setDefaultTime();dateChange()" [formControl]="date_filter"   class="date-filter">
+       </div>
+    </div>
+    <div class="input-container">
+        <label >From</label>
+       <div class="input-elements" >
+           <!-- <input type="time" class="date-filter"> -->
+           <div >
+               <select [formControl]="from_hour" class="time-filter" (change)="dateChange()" >
+                <!-- <option *ngFor="let hour of hours" value="hour">{{hour}}</option> -->
+                   <option value="01">01</option>
+                   <option value="02">02</option>
+                   <option value="03">03</option>
+                   <option value="04">04</option>
+                   <option value="05">05</option>
+                   <option value="06">06</option>
+                   <option value="07">07</option>
+                   <option value="08">08</option>
+                   <option value="09">09</option>
+                   <option value="10">10</option>
+                   <option value="11">11</option>
+                   <option value="12">12</option>
+               </select>
+
+               <select [formControl]="from_minute" class="time-filter" (change)="dateChange()">
+                <!-- <option *ngFor="let minute of minutes" value="minute">{{minute}}</option> -->
+                <option value="00">00</option>
+                <option>01</option>
+                <option>02</option>
+                <option>03</option>
+                <option>04</option>
+                <option>05</option>
+                <option>06</option>
+                <option>07</option>
+                <option>08</option>
+                <option>09</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+                <option>18</option>
+                <option>19</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+                <option>23</option>
+                <option>24</option>
+                <option>25</option>
+                <option>26</option>
+                <option>27</option>
+                <option>28</option>
+                <option>29</option>
+                <option>30</option>
+                <option>31</option>
+                <option>32</option>
+                <option>33</option>
+                <option>34</option>
+                <option>35</option>
+                <option>36</option>
+                <option>37</option>
+                <option>38</option>
+                <option>39</option>
+                <option>40</option>
+                <option>41</option>
+                <option>42</option>
+                <option>43</option>
+                <option>44</option>
+                <option>45</option>
+                <option>46</option>
+                <option>47</option>
+                <option>48</option>
+                <option>49</option>
+                <option>50</option>
+                <option>51</option>
+                <option>52</option>
+                <option>53</option>
+                <option>54</option>
+                <option>55</option>
+                <option>56</option>
+                <option>57</option>
+                <option>58</option>
+                <option>59</option>
+                
+            </select>
+            <select [formControl]="from_meridiem" class="time-filter" (change)="dateChange()" >
+                <option value="am" >AM</option>
+                <option value="pm" >PM</option>
+            </select>
+           </div>
+       </div>
+    </div>
+    <div class="input-container">
+        <label >To</label>
+        <div class="input-elements" >
+            <!-- <input type="time" class="date-filter"> -->
+            <div >
+                <select class="time-filter" [formControl]="to_hour"  (change)="dateChange()">
+                    <!-- <option *ngFor="let hour of hours" value="hour">{{hour}}</option> -->
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+ 
+                <select class="time-filter" [formControl]="to_minute" (change)=" dateChange()">
+                    <!-- <option *ngFor="let minute of minutes" value="minute">{{minute}}</option> -->
+                 <option value="00">00</option>
+                 <option value="01">01</option>
+                 <option value="02">02</option>
+                 <option value="03">03</option>
+                 <option value="04">04</option>
+                 <option value="05">05</option>
+                 <option value="06">06</option>
+                 <option value="07">07</option>
+                 <option value="08">08</option>
+                 <option value="09">09</option>
+                 <option value="10">10</option>
+                 <option value="11">11</option>
+                 <option value="12">12</option>
+                 <option value="13">13</option>
+                 <option value="14">14</option>
+                 <option value="15">15</option>
+                 <option value="16">16</option>
+                 <option value="17">17</option>
+                 <option>18</option>
+                 <option>19</option>
+                 <option>20</option>
+                 <option>21</option>
+                 <option>22</option>
+                 <option>23</option>
+                 <option>24</option>
+                 <option>25</option>
+                 <option>26</option>
+                 <option>27</option>
+                 <option>28</option>
+                 <option>29</option>
+                 <option>30</option>
+                 <option>31</option>
+                 <option>32</option>
+                 <option>33</option>
+                 <option>34</option>
+                 <option>35</option>
+                 <option>36</option>
+                 <option>37</option>
+                 <option>38</option>
+                 <option>39</option>
+                 <option>40</option>
+                 <option>41</option>
+                 <option>42</option>
+                 <option>43</option>
+                 <option>44</option>
+                 <option>45</option>
+                 <option>46</option>
+                 <option>47</option>
+                 <option>48</option>
+                 <option>49</option>
+                 <option>50</option>
+                 <option>51</option>
+                 <option>52</option>
+                 <option>53</option>
+                 <option>54</option>
+                 <option>55</option>
+                 <option>56</option>
+                 <option>57</option>
+                 <option>58</option>
+                 <option>59</option>
+                 
+             </select>
+             <select class="time-filter" [formControl]="to_meridiem"  (change)=" dateChange()">
+                 <option value ="am" >AM</option>
+                 <option value="pm" >PM</option>
+             </select>
+            </div>
+        </div>
+    </div>
+ </div>
+ 
+
+ <div class="log-table">
+     <div class="table-head">
+         <div class="type">Type</div>
+         <div class="message">Message</div>
+         <div class="time">Time</div>
+     </div>
+     <div class="table-content-container">
+        <div class="no-data"  *ngIf="display_data.length ==  0">NO DATA TO DISPLAY !</div>
+        <div class="table-content"  *ngFor="let log of display_data;"  >
+            <div class="type" > 
+                <!-- <ion-icon *ngIf="log.type == 'success'" name="checkmark-circle-outline"></ion-icon> 
+                <ion-icon *ngIf="log.type == 'error'  " name="close-circle-outline"></ion-icon>  
+                <ion-icon  *ngIf="log.type == 'warn'"  name="alert-circle-outline"></ion-icon> 
+                <ion-icon *ngIf="log.type == 'info'" name="information-circle-outline"></ion-icon> -->
+                <ion-icon  *ngIf="log.type == 'WARNING'"  name="alert-circle-outline"></ion-icon>  
+                <ion-icon *ngIf="log.type == 'CRITICAL'" name="information-circle-outline"></ion-icon>
+                <ion-icon *ngIf="log.type == 'ERROR'" name="close-circle-outline"></ion-icon> 
+                 <span>{{log.type}}</span></div>
+            <div class="message message-content">{{log.message}}</div>
+            <div class="time"> <div>{{log.time | date}}</div><div style="font-size: 0.7vw;text-transform: lowercase;">{{log.hr_min }}</div> </div>
+         </div>
+         
+     </div>
+    
+ </div>
+ <div style="text-align: center;padding: 10px 0px;color: blue;cursor: pointer;" class="view-more" (click)="viewMore()">
+    View More
+</div>
+</div>
+
+</div>
+<!-- {{log.time | date:"HH:mm"}} -->
